@@ -13,7 +13,7 @@ SRC= logger.cpp \
 	 main.cpp
 _OBJ=$(SRC:.cpp=.o)
 OBJ=$(patsubst %,$(ODIR)/%,$(_OBJ))
-_DEPS= logger.h
+_DEPS= logger.h config.h
 DEPS=$(patsubst %,$(IDIR)/%,$(_DEPS))
 
 #Flag Handling
