@@ -27,13 +27,16 @@ int main(int argc, char *argv[]) {
 	*/
 	if(argc > 1) {
 		// Parse
+		logStuff *p_stuff = (logStuff *) getRawData();
+		printLogStuff(*p_stuff);
+		delete[] p_stuff;
 	} else {
 		// Generate
 		logStuff stuff;
 		stuff.x = 4;
 		stuff.y = 8.32;
 		stuff.c = 'x';
-		printLogStuff(stuff);
+		printRawValue(stuff);
 	}
 	return 0;
 }

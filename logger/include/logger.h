@@ -44,8 +44,11 @@ struct logStuff {
 void printLogStuff(logStuff s);
 
 void printRawData(int len, void *d);
+// A macro so you don't have to calculate len everytime
+#define printRawValue(v) \
+	printRawData(sizeof(v), (void *)&(v));
 
-void * getRawData(char *raw);
+void * getRawData();
 
 
 #endif

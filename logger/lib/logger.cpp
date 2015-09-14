@@ -21,14 +21,14 @@ void printRawData(int len, void *d) {
 	}
 }
 
-void * getRawData(char *raw) {
+void * getRawData() {
 	int len = 0;
 	for(int i = 0; i < sizeof(int); ++i) {
 		((char *)&len)[i] = (char) std::cin.get();
 	}
 	void *d = (void *) new char[len];
 	for(int i = 0; i < len; ++i) {
-		((char *)&d)[i] = (char) std::cin.get();
+		((char *)d)[i] = (char) std::cin.get();
 	}
 	return d;
 }
