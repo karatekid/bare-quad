@@ -18,10 +18,22 @@ int timePID(int x) {
 	return x * 2;
 }
 
-int main() {
+int main(int argc, char *argv[]) {
+	/*
 	logPrint(SSMAIN, DEBUG, "Hello World!");
 	int x;
 	logFunctionTime(SSMAIN, x=timePID(3));
 	printf("hey: %d\n", x);
+	*/
+	if(argc > 1) {
+		// Parse
+	} else {
+		// Generate
+		logStuff stuff;
+		stuff.x = 4;
+		stuff.y = 8.32;
+		stuff.c = 'x';
+		printLogStuff(stuff);
+	}
 	return 0;
 }

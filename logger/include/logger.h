@@ -35,6 +35,17 @@ void logPrint(eLogSubsystem ss, eLogLevel lvl, const char *s);
 	logPrint(ss, INFO, #VAR "= ");
 #define logRawData (ss, VAR)
 
+struct logStuff {
+	int x;
+	double y;
+	char c;
+};
+
+void printLogStuff(logStuff s);
+
+void printRawData(int len, void *d);
+
+void * getRawData(char *raw);
 
 
 #endif
