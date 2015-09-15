@@ -51,10 +51,11 @@ The format of the payloads of these types is given below.
 #### Print
 
 | Unknown length string |
+| --- |
 | no null-terminating character |
 
 #### Raw Data
 
 | 1 byte length of data | data | string id |
 | --- | --- | --- |
-| to know how large data is | raw data | used to tell which variable it is the common type should tell what type of object this is|
+| to know how large data is | raw data | used for variable identification, type identification should be in message type|
