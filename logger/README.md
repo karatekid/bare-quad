@@ -11,7 +11,7 @@ The logger message protocol has a fairly straightforward design.
 
 | Start | Log Level | Subsystem | Msg Type | Len | Payload |
 |-------|-----------|-----------|----------|-----|---------|
-| '>'   | 1 byte id | 1 byte id | 1 byte id | # of bytes in payload | {Len} byte payload specified by previous field |
+| '>'   | 1 byte id | 1 byte id | 1 byte id | # of bytes in payload (1 byte) | {Len} byte payload specified by previous field |
 
 ### Payload
 
@@ -40,7 +40,7 @@ The format of the payloads of these types is given below.
 
 | 4 byte unsigned int | Unknown length string |
 | --- | --- |
-| count | id, no null-terminating character |
+| count | id |
 
 #### Version
 
@@ -51,7 +51,7 @@ The format of the payloads of these types is given below.
 #### Print
 
 | Unknown length string |
-| no null-terminating character |
+| Usually for message |
 
 #### Raw Data
 

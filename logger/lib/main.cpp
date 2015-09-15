@@ -10,6 +10,7 @@
 
  _._._._._._._._._._._._._._._._._._._._._.*/
 #include "logger.h"
+#include "parser.h"
 #include "unistd.h"
 #include<stdio.h>
 int timePID(int x) {
@@ -26,17 +27,18 @@ int main(int argc, char *argv[]) {
 	printf("hey: %d\n", x);
 	*/
 	if(argc > 1) {
+		parseLog();
 		// Parse
-		logStuff *p_stuff = (logStuff *) getRawData();
-		printLogStuff(*p_stuff);
-		delete[] p_stuff;
+		//logStuff *p_stuff = (logStuff *) getRawData();
+		//printLogStuff(*p_stuff);
+		//delete[] p_stuff;
 	} else {
 		// Generate
 		logStuff stuff;
 		stuff.x = 4;
 		stuff.y = 8.32;
 		stuff.c = 'x';
-		printRawValue(stuff);
+		logRawVar(DEBUG, SS_MAIN, T_LOGSTUFF, stuff);
 	}
 	return 0;
 }

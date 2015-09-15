@@ -2,53 +2,39 @@
 #define __LOGGER__H__
 #include "config.h"
 
-// Log Level Setup
-#define NUM_LOG_LEVELS 4
-typedef enum {
-	ERROR,
-	WARNING,
-	DEBUG,
-	INFO
-} eLogLevel;
-
-static const char* logLevelNames[NUM_LOG_LEVELS] = {
-	[ERROR] = "Error",
-    [WARNING] = "Warning",
-	[DEBUG] = "Debug",
-	[INFO] = "Info"
-};
-
-static const char logLevelCodes[NUM_LOG_LEVELS] = {
-	[ERROR] = 'E',
-	[WARNING] = 'W',
-	[DEBUG] = 'D',
-	[INFO] = 'I'
-};
-
 // Log function declarations
-void logPrint(eLogSubsystem ss, eLogLevel lvl, const char *s);
-#define logFunctionTime(ss, FXN) \
-	logPrint(ss, INFO, "Start: " #FXN); \
+
+// Generic logging function used by all others
+void logHead(eLogLevel lvl, eLogSubsystem ss, eLogType type, uint8_t len);
+
+void logTimeRaw(eLogLevel lvl, eLogSubsystem ss, const char *id, bool start);
+// A macro to wrap around functions
+#define logFunctionTime(lvl, ss, FXN) \
+	logTimeRaw(lvl, ss, #FXN, true); \
 	FXN; \
-	logPrint(ss, INFO, "End: " #FXN);
-#define logCount(ss, VAR) \
-	logPrint(ss, INFO, #VAR "= ");
-#define logRawData (ss, VAR)
+	logTimeRaw(lvl, ss, #FXN, false)
 
-struct logStuff {
-	int x;
-	double y;
-	char c;
-};
+void logCount(eLogLevel lvl, eLogSubsystem ss, uint32_t count, const char *id);
+// A macro to wrap around variables
+#define logVariableCount(lvl, ss, VAR) \
+	logCount(lvl, ss, VAR, #VAR)
 
-void printLogStuff(logStuff s);
+// Version is automatically only info log level
+void logVersion(eLogSubsystem ss, uint8_t major, uint8_t minor, uint8_t build);
 
-void printRawData(int len, void *d);
+void logPrint(eLogLevel lvl, eLogSubsystem ss, const char *s);
+
+void logRawData(eLogLevel lvl, eLogSubsystem ss, eLogType type, uint8_t length, const char *data, const char *id);
+#define logRawVar(lvl, ss, type, VAR) \
+	logRawData(lvl, ss, type, sizeof(VAR), (char *)&(VAR), #VAR)
+
+// Helper that makes writing arbitrary data easy
+void writeRawData(uint8_t len, void *d);
 // A macro so you don't have to calculate len everytime
-#define printRawValue(v) \
-	printRawData(sizeof(v), (void *)&(v));
+#define writeRawValue(v) \
+	writeRawData(sizeof(v), (void *)&(v))
 
-void * getRawData();
+//void * getRawData();
 
 
 #endif

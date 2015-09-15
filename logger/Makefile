@@ -10,10 +10,12 @@ ODIR=obj
 #Files
 BINFILE= example
 SRC= logger.cpp \
+	 parser.cpp \
+	 config.cpp \
 	 main.cpp
 _OBJ=$(SRC:.cpp=.o)
 OBJ=$(patsubst %,$(ODIR)/%,$(_OBJ))
-_DEPS= logger.h config.h
+_DEPS= logger.h parser.h config.h
 DEPS=$(patsubst %,$(IDIR)/%,$(_DEPS))
 
 #Flag Handling
