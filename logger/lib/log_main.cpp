@@ -20,15 +20,16 @@ int timePID(int x) {
 
 int main(int argc, char *argv[]) {
 	// Generate
+	Logger *log = Logger::getLogger();
 	logStuff stuff;
 	stuff.x = 4;
 	stuff.y = 8.32;
 	stuff.c = 'x';
-	logRawVar(DEBUG, SS_MAIN, T_LOGSTUFF, stuff);
-	logTimeRaw(INFO, SS_MAIN, "hey", true);
-	logVariableCount(INFO, SS_MAIN, stuff.x);
-	logVersion(SS_MAIN, 0,0,1);
-	logPrint(ERROR, SS_MAIN, "OH NOO");
-	logFunctionTime(WARNING, SS_PID, timePID(2));
+	log->logRawVar(DEBUG, SS_MAIN, T_LOGSTUFF, stuff);
+	log->logTimeRaw(INFO, SS_MAIN, "hey", true);
+	log->logVariableCount(INFO, SS_MAIN, stuff.x);
+	log->logVersion(SS_MAIN, 0,0,1);
+	log->logPrint(ERROR, SS_MAIN, "OH NOO");
+	log->logFunctionTime(WARNING, SS_PID, timePID(2));
 	return 0;
 }
