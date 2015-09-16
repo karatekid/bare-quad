@@ -15,7 +15,7 @@
 #include<stdio.h>
 int timePID(int x) {
 	sleep(1);
-	printf("%d\n",x);
+	//printf("%d\n",x);
 	return x * 2;
 }
 
@@ -27,7 +27,9 @@ int main(int argc, char *argv[]) {
 	printf("hey: %d\n", x);
 	*/
 	if(argc > 1) {
-		parseLog();
+		for(;;) {
+			parseLog();
+		}
 		// Parse
 		//logStuff *p_stuff = (logStuff *) getRawData();
 		//printLogStuff(*p_stuff);
@@ -39,6 +41,11 @@ int main(int argc, char *argv[]) {
 		stuff.y = 8.32;
 		stuff.c = 'x';
 		logRawVar(DEBUG, SS_MAIN, T_LOGSTUFF, stuff);
+		logTimeRaw(INFO, SS_MAIN, "hey", true);
+		logVariableCount(INFO, SS_MAIN, stuff.x);
+		logVersion(SS_MAIN, 0,0,1);
+		logPrint(ERROR, SS_MAIN, "OH NOO");
+		logFunctionTime(WARNING, SS_PID, timePID(2));
 	}
 	return 0;
 }

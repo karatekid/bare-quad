@@ -45,7 +45,7 @@ typedef enum {
 } eLogType;
 extern const char *const logTypeNames[NUM_TYPES];
 
-typedef void(*ParseFunctionPointer)(uint8_t, const char *);
+typedef void(*ParseFunctionPointer)(uint16_t, const char *);
 
 
 // Processor dependent implementation of writec, readc, & getmicros

@@ -5,7 +5,7 @@
 // Log function declarations
 
 // Generic logging function used by all others
-void logHead(eLogLevel lvl, eLogSubsystem ss, eLogType type, uint8_t len);
+void logHead(eLogLevel lvl, eLogSubsystem ss, eLogType type, uint32_t len);
 
 void logTimeRaw(eLogLevel lvl, eLogSubsystem ss, const char *id, bool start);
 // A macro to wrap around functions
@@ -24,12 +24,12 @@ void logVersion(eLogSubsystem ss, uint8_t major, uint8_t minor, uint8_t build);
 
 void logPrint(eLogLevel lvl, eLogSubsystem ss, const char *s);
 
-void logRawData(eLogLevel lvl, eLogSubsystem ss, eLogType type, uint8_t length, const char *data, const char *id);
+void logRawData(eLogLevel lvl, eLogSubsystem ss, eLogType type, uint32_t len, const char *data, const char *id);
 #define logRawVar(lvl, ss, type, VAR) \
 	logRawData(lvl, ss, type, sizeof(VAR), (char *)&(VAR), #VAR)
 
 // Helper that makes writing arbitrary data easy
-void writeRawData(uint8_t len, const char *d);
+void writeRawData(uint16_t len, const char *d);
 // A macro so you don't have to calculate len everytime
 #define writeRawValue(v) \
 	writeRawData(sizeof(v), (char *)&(v))

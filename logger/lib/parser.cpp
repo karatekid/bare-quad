@@ -14,9 +14,10 @@ void parseLog() {
 	eLogLevel lvl = (eLogLevel) readc();
 	eLogSubsystem ss = (eLogSubsystem) readc();
 	eLogType type = (eLogType) readc();
-	uint8_t len = (uint8_t) readc();
+	uint16_t len  = (uint16_t) readc();
+	len += ((uint16_t) readc()) << 8;
 	char *payload = new char[len];
-	for(uint8_t i = 0; i < len; ++i) {
+	for(uint16_t i = 0; i < len; ++i) {
 		payload[i] = readc();
 	}
 	if(!filterLog(lvl, ss)) {
@@ -42,38 +43,49 @@ const ParseFunctionPointer parseFunctions[NUM_TYPES] = {
 	[T_LOGSTUFF] = parseLogStuff
 };
 
-void parseTimeLog(uint8_t len, const char *data) {
+void parseTimeLog(uint16_t len, const char *data) {
 	bool start = (data[0] == 'b');
 	uint32_t time;
 	cpyRawValue(time, data + 1);
 	char id[len - 5];
 	strcpy(id, data + 5);
+	printf("%s ", id);
+	if(start) {
+		printf("started");
+	} else {
+		printf("ended");
+	}
+	printf(" @ %d seconds\n", time);
 }
 
-void parseCountLog(uint8_t len, const char *data) {
+void parseCountLog(uint16_t len, const char *data) {
 	uint32_t count;
 	cpyRawValue(count, data);
 	char id[len - 4];
 	strcpy(id, data + 4);
+	printf("%s = %d\n", id, count);
 }
 
-void parseVersionLog(uint8_t len, const char *data) {
+void parseVersionLog(uint16_t len, const char *data) {
 	uint8_t major, minor, build;
 	major = data[0];
 	minor = data[1];
 	build = data[2];
+	printf("%d.%d.%d\n", major, minor, build);
 }
 
-void parsePrintLog(uint8_t len, const char *data) {
+void parsePrintLog(uint16_t len, const char *data) {
 	char s[len];
 	strcpy(s, data);
+	printf("%s\n",s);
 }
 
-void parseLogStuff(uint8_t len, const char *data) {
-	uint8_t data_len = data[0];
+void parseLogStuff(uint16_t len, const char *data) {
+	uint16_t data_len;
+	cpyRawValue(data_len, data);
 	logStuff stuff;
-	cpyRawValue(stuff, data + 1);
-	char id[len - data_len - 1];
-	strcpy(id, data + 1 + data_len);
+	cpyRawValue(stuff, data + 2);
+	char id[len - data_len - 2];
+	strcpy(id, data + 2 + data_len);
 	printf("x:%d,y:%f,z:%c\n",stuff.x,stuff.y,stuff.c);
 }
