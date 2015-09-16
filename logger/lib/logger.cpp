@@ -2,6 +2,14 @@
 
 Logger* Logger::logger = NULL;
 
+Logger::Logger() {
+	logOn = true;
+	//Set all to be active
+	for(int i = 0; i < NUM_SUBSYSTEMS; ++i) {
+		logLevels[i] = INFO;
+	}
+}
+
 Logger* Logger::getLogger() {
 	if(!logger) {
 		logger = new Logger();
@@ -9,11 +17,24 @@ Logger* Logger::getLogger() {
 	return logger;
 }
 
+void Logger::on() {
+	logOn = true;
+}
+
+void Logger::off() {
+	logOn = false;
+}
+
+void Logger::setLevel(eLogLevel lvl, eLogSubsystem ss) {
+	logLevels[ss] = lvl;
+}
+
 void Logger::logHead(
 		eLogLevel lvl,
 		eLogSubsystem ss,
 		eLogType type,
 		uint32_t len) {
+	if(filter(lvl, ss)) return;
 	writec(LOG_START_CHAR);
 	writec(lvl);
 	writec(ss);
@@ -31,6 +52,7 @@ void Logger::logTimeRaw(
 		eLogSubsystem ss,
 		const char *id,
 		bool start) {
+	if(filter(lvl, ss)) return;
 	uint32_t id_len = strlen(id);
 	logHead(lvl, ss, T_TIME, 5 + id_len);
 	writec(start ? 'b' : 'e');
@@ -44,6 +66,7 @@ void Logger::logCount(
 		eLogSubsystem ss,
 		uint32_t count,
 		const char *id) {
+	if(filter(lvl, ss)) return;
 	uint32_t id_len = strlen(id);
 	logHead(lvl, ss, T_COUNT, 4 + id_len);
 	writeRawValue(count);
@@ -55,6 +78,7 @@ void Logger::logVersion(
 		uint8_t major,
 		uint8_t minor,
 		uint8_t build) {
+	if(filter(INFO, ss)) return;
 	logHead(INFO, ss, T_VERSION, 3);
 	writec(major);
 	writec(minor);
@@ -65,6 +89,7 @@ void Logger::logPrint(
 		eLogLevel lvl,
 		eLogSubsystem ss,
 		const char *s) {
+	if(filter(lvl, ss)) return;
 	uint32_t s_len = strlen(s);
 	logHead(lvl, ss, T_PRINT, s_len);
 	writeRawData(s_len, s);
@@ -77,6 +102,7 @@ void Logger::logRawData(
 		uint32_t len,
 		const char *data,
 		const char *id) {
+	if(filter(lvl, ss)) return;
 	uint32_t len_id = strlen(id);
 	logHead(lvl, ss, type, 1 + len_id + len);
 	// Length of the raw data
@@ -92,4 +118,8 @@ void Logger::writeRawData(
 	for(uint16_t i = 0; i < len; ++i) {
 		writec(d[i]);
 	}
+}
+
+bool Logger::filter(eLogLevel lvl, eLogSubsystem ss) {
+	return (!logOn || (lvl > logLevels[ss]));
 }

@@ -6,7 +6,10 @@ class Logger {
 	public:
 		// Gets singleton
 		static Logger *getLogger();
-		//User Functions
+		void on();
+		void off();
+		//Sets which level the subsystem must reach to get logged
+		void setLevel(eLogLevel lvl, eLogSubsystem ss);
 		void logTimeRaw(eLogLevel lvl, eLogSubsystem ss, const char *id, bool start);
 		// A macro to wrap around functions
 		#define logFunctionTime(lvl, ss, FXN) \
@@ -27,7 +30,7 @@ class Logger {
 			logRawData(lvl, ss, type, sizeof(VAR), (char *)&(VAR), #VAR)
 
 	protected:
-		Logger(){};
+		Logger();
 	private:
 		// Generic logging function used by all others
 		void logHead(eLogLevel lvl, eLogSubsystem ss, eLogType type, uint32_t len);
@@ -37,6 +40,11 @@ class Logger {
 		#define writeRawValue(v) \
 			writeRawData(sizeof(v), (char *)&(v))
 
+		// Helper to filter out those calls that have been quieted
+		bool filter(eLogLevel lvl, eLogSubsystem ss);
+
+		bool logOn;
+		eLogLevel logLevels[NUM_SUBSYSTEMS];
 		static Logger* logger;
 };
 

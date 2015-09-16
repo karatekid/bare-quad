@@ -11,8 +11,12 @@
 #define LOG_START_CHAR '>'
 
 // Log Level Setup
-#define NUM_LOG_LEVELS 4
+#define NUM_LOG_LEVELS 5
 typedef enum {
+	// Don't use this anywhere, specifiically for filtering out
+	// everything
+	IGNORE_SS,
+	// IGNORE_SS must be first entry
 	ERROR,
 	WARNING,
 	DEBUG,

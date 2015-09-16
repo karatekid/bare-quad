@@ -12,10 +12,11 @@
 #include "config.h"
 
 const char *const logLevelNames[NUM_LOG_LEVELS] = {
-	[ERROR]   = "Error",
-    [WARNING] = "Warning",
-	[DEBUG]   = "Debug",
-	[INFO]    = "Info"
+	[IGNORE_SS]   = "IGNORE",
+	[ERROR]       = "Error",
+    [WARNING]     = "Warning",
+	[DEBUG]       = "Debug",
+	[INFO]        = "Info"
 };
 
 const char *const logSubsystemNames[NUM_SUBSYSTEMS] = {
