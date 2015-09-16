@@ -13,8 +13,8 @@
 #include "unistd.h"
 #include<stdio.h>
 int main(int argc, char *argv[]) {
-	for(;;) {
-		parseLog();
-	}
-	return 0;
+    for(;;) {
+        parseLog();
+    }
+    return 0;
 }

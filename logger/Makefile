@@ -10,11 +10,11 @@ ODIR=obj
 #Files
 BINFILE= logger parser
 LSRC= logger.cpp \
-	  config.cpp \
-	  log_main.cpp
+      config.cpp \
+      log_main.cpp
 PSRC= parser.cpp \
-	  config.cpp \
-	  parse_main.cpp
+      config.cpp \
+      parse_main.cpp
 _POBJ=$(PSRC:.cpp=.o)
 POBJ=$(patsubst %,$(ODIR)/%,$(_POBJ))
 _PDEPS= parser.h config.h logstuff.h
@@ -43,24 +43,24 @@ endif
 
 all: $(BINFILE)
 help:
-	$(E)
-	$(E)Helpful Comments
-	$(E)
+    $(E)
+    $(E)Helpful Comments
+    $(E)
 
 $(ODIR)/%.o: $(LDIR)/%.cpp $(DEPS)
-	$(E)C++-compiling $<
-	$(Q)if [ ! -d `dirname $@` ]; then mkdir -p `dirname $@`; fi
-	$(Q)$(CXX) -o $@ -c $< $(CPPFLAGS) -I$(IDIR)
+    $(E)C++-compiling $<
+    $(Q)if [ ! -d `dirname $@` ]; then mkdir -p `dirname $@`; fi
+    $(Q)$(CXX) -o $@ -c $< $(CPPFLAGS) -I$(IDIR)
 
 logger: $(LOBJ) $(LDEPS)
-	$(E)Linking $@
-	$(Q)$(CXX) -o $@ $^ $(CPPFLAGS) $(LIBS) $(LDFLAGS)
+    $(E)Linking $@
+    $(Q)$(CXX) -o $@ $^ $(CPPFLAGS) $(LIBS) $(LDFLAGS)
 
 parser: $(POBJ) $(PDEPS)
-	$(E)Linking $@
-	$(Q)$(CXX) -o $@ $^ $(CPPFLAGS) $(LIBS) $(LDFLAGS)
+    $(E)Linking $@
+    $(Q)$(CXX) -o $@ $^ $(CPPFLAGS) $(LIBS) $(LDFLAGS)
 
 clean:
-	$(E)Removing Files
-	$(Q)rm -f $(ODIR)/*.o $(BINFILE)
-	$(Q)if [ -d $(ODIR) ]; then rmdir $(ODIR); fi
+    $(E)Removing Files
+    $(Q)rm -f $(ODIR)/*.o $(BINFILE)
+    $(Q)if [ -d $(ODIR) ]; then rmdir $(ODIR); fi

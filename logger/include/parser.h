@@ -17,6 +17,6 @@ void parsePrintLog(uint16_t len, const char *data);
 void parseLogStuff(uint16_t len, const char *data);
 
 #define cpyRawValue(d, o) \
-	memcpy((void *)&(d), (void *)(o), sizeof(d))
+    memcpy((void *)&(d), (void *)(o), sizeof(d))
 
 #endif
