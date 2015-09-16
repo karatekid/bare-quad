@@ -20,18 +20,12 @@ void parseLog() {
     for(uint16_t i = 0; i < len; ++i) {
         payload[i] = readc();
     }
-    if(!filterLog(lvl, ss)) {
-        printf("%s:%s(%s)\t",
-                logLevelNames[lvl],
-                logSubsystemNames[ss],
-                logTypeNames[type]);
-        parseFunctions[type](len, payload);
-    }
+    printf("%s:%s(%s)\t",
+            logLevelNames[lvl],
+            logSubsystemNames[ss],
+            logTypeNames[type]);
+    parseFunctions[type](len, payload);
     delete[] payload;
-}
-
-bool filterLog(eLogLevel lvl, eLogSubsystem ss) {
-    return false;
 }
 
 const ParseFunctionPointer parseFunctions[NUM_TYPES] = {

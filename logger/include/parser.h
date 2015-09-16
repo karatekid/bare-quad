@@ -3,8 +3,6 @@
 #include "config.h"
 // Parses one log object
 void parseLog(); 
-// Return true if don't want it (filter it)
-bool filterLog(eLogLevel lvl, eLogSubsystem ss);
 
 // Parsing functions
 extern const ParseFunctionPointer parseFunctions[NUM_TYPES];
