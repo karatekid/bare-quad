@@ -4,10 +4,15 @@ Logger* Logger::logger = NULL;
 
 Logger::Logger() {
     logOn = true;
-    //Set all to be active
+    // Set all to be active
     for(int i = 0; i < NUM_SUBSYSTEMS; ++i) {
         logLevels[i] = INFO;
     }
+#ifdef ARDUINO
+    // Initialize Serial
+    // TODO: let this be configurable
+    Serial.begin(9600);
+#endif
 }
 
 Logger* Logger::getLogger() {
@@ -41,7 +46,9 @@ void Logger::logHead(
     writec(type);
     // This is where the majority of length checking happens
     if(len > UINT16_MAX) {
+#ifndef ARDUINO
         throw "Length of log message too large";
+#endif
     }
     uint16_t sLen = (uint16_t) len;
     writeRawValue(sLen);

@@ -1,9 +1,28 @@
 #ifndef __CONFIG__H__
 #define __CONFIG__H__
-#include<iostream>
-#include<cstring>
 #include<stdio.h>
 #include<stdint.h>
+
+// Processor dependent implementation of writec, readc, & getmicros
+#ifdef ARDUINO
+// On Arduino
+#include "Arduino.h"
+#define UINT16_MAX (65535U)
+#define writec(c) Serial.print(c)
+#define readc() \
+    while(!Serial.available()); \
+    Serial.read()
+#define getmicros() micros()
+#else
+#include<iostream>
+#include<cstring>
+// On computer
+#define writec(c) std::cout.put(c)
+#define readc() (char) std::cin.get()
+// TODO: get micros
+#define getmicros() 43
+#endif
+
 // User libraries
 #include "logstuff.h"
 
@@ -52,21 +71,6 @@ extern const char *const logTypeNames[NUM_TYPES];
 typedef void(*ParseFunctionPointer)(uint16_t, const char *);
 
 
-// Processor dependent implementation of writec, readc, & getmicros
-#ifdef ARDUINO
-// On Arduino
-#define writec(c) Serial.print(c)
-#define readc() \
-    while(!Serial.available()); \
-    Serial.read()
-#define getmicros() micros()
-#else
-// On computer
-#define writec(c) std::cout.put(c)
-#define readc() (char) std::cin.get()
-// TODO: get micros
-#define getmicros() 43
-#endif
 
 
 
