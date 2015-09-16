@@ -8,15 +8,24 @@ IDIR=include
 LDIR=lib
 ODIR=obj
 #Files
-BINFILE= example
-SRC= logger.cpp \
-	 parser.cpp \
-	 config.cpp \
-	 main.cpp
-_OBJ=$(SRC:.cpp=.o)
-OBJ=$(patsubst %,$(ODIR)/%,$(_OBJ))
-_DEPS= logger.h parser.h config.h logstuff.h
-DEPS=$(patsubst %,$(IDIR)/%,$(_DEPS))
+BINFILE= logger parser
+LSRC= logger.cpp \
+	  config.cpp \
+	  log_main.cpp
+PSRC= parser.cpp \
+	  config.cpp \
+	  parse_main.cpp
+_POBJ=$(PSRC:.cpp=.o)
+POBJ=$(patsubst %,$(ODIR)/%,$(_POBJ))
+_PDEPS= parser.h config.h logstuff.h
+PDEPS=$(patsubst %,$(IDIR)/%,$(_PDEPS))
+
+_LOBJ=$(LSRC:.cpp=.o)
+LOBJ=$(patsubst %,$(ODIR)/%,$(_LOBJ))
+_LDEPS= logger.h config.h logstuff.h
+LDEPS=$(patsubst %,$(IDIR)/%,$(_LDEPS))
+
+DEPS=$(LDEPS) $(PDEPS)
 
 #Flag Handling
 ifdef DEBUG
@@ -43,7 +52,11 @@ $(ODIR)/%.o: $(LDIR)/%.cpp $(DEPS)
 	$(Q)if [ ! -d `dirname $@` ]; then mkdir -p `dirname $@`; fi
 	$(Q)$(CXX) -o $@ -c $< $(CPPFLAGS) -I$(IDIR)
 
-$(BINFILE):	$(OBJ) $(DEPS)
+logger: $(LOBJ) $(LDEPS)
+	$(E)Linking $@
+	$(Q)$(CXX) -o $@ $^ $(CPPFLAGS) $(LIBS) $(LDFLAGS)
+
+parser: $(POBJ) $(PDEPS)
 	$(E)Linking $@
 	$(Q)$(CXX) -o $@ $^ $(CPPFLAGS) $(LIBS) $(LDFLAGS)
 
