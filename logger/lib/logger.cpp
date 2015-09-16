@@ -47,7 +47,7 @@ void Logger::logHead(
     writeRawValue(sLen);
 }
 
-void Logger::logTimeRaw(
+void Logger::timeRaw(
         eLogLevel lvl,
         eLogSubsystem ss,
         const char *id,
@@ -61,7 +61,7 @@ void Logger::logTimeRaw(
     writeRawData(id_len, id);
 }
 
-void Logger::logCount(
+void Logger::count(
         eLogLevel lvl,
         eLogSubsystem ss,
         uint32_t count,
@@ -73,7 +73,7 @@ void Logger::logCount(
     writeRawData(id_len, id);
 }
 
-void Logger::logVersion(
+void Logger::version(
         eLogSubsystem ss,
         uint8_t major,
         uint8_t minor,
@@ -85,7 +85,7 @@ void Logger::logVersion(
     writec(build);
 }
 
-void Logger::logPrint(
+void Logger::print(
         eLogLevel lvl,
         eLogSubsystem ss,
         const char *s) {
@@ -95,7 +95,7 @@ void Logger::logPrint(
     writeRawData(s_len, s);
 }
 
-void Logger::logRawData(
+void Logger::rawData(
         eLogLevel lvl,
         eLogSubsystem ss,
         eLogType type,

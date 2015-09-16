@@ -10,24 +10,24 @@ class Logger {
         void off();
         //Sets which level the subsystem must reach to get logged
         void setLevel(eLogLevel lvl, eLogSubsystem ss);
-        void logTimeRaw(eLogLevel lvl, eLogSubsystem ss, const char *id, bool start);
+        void timeRaw(eLogLevel lvl, eLogSubsystem ss, const char *id, bool start);
         // A macro to wrap around functions
-        #define logFunctionTime(lvl, ss, FXN) \
-            logTimeRaw(lvl, ss, #FXN, true); \
+        #define functionTime(lvl, ss, FXN) \
+            timeRaw(lvl, ss, #FXN, true); \
             FXN; \
-            Logger::getLogger()->logTimeRaw(lvl, ss, #FXN, false)
-        void logCount(eLogLevel lvl, eLogSubsystem ss, uint32_t count, const char *id);
+            Logger::getLogger()->timeRaw(lvl, ss, #FXN, false)
+        void count(eLogLevel lvl, eLogSubsystem ss, uint32_t count, const char *id);
         // A macro to wrap around variables
-        #define logVariableCount(lvl, ss, VAR) \
-            logCount(lvl, ss, VAR, #VAR)
+        #define variableCount(lvl, ss, VAR) \
+            count(lvl, ss, VAR, #VAR)
         // Version is automatically only info log level
-        void logVersion(eLogSubsystem ss, uint8_t major, uint8_t minor, uint8_t build);
+        void version(eLogSubsystem ss, uint8_t major, uint8_t minor, uint8_t build);
 
-        void logPrint(eLogLevel lvl, eLogSubsystem ss, const char *s);
+        void print(eLogLevel lvl, eLogSubsystem ss, const char *s);
 
-        void logRawData(eLogLevel lvl, eLogSubsystem ss, eLogType type, uint32_t len, const char *data, const char *id);
-        #define logRawVar(lvl, ss, type, VAR) \
-            logRawData(lvl, ss, type, sizeof(VAR), (char *)&(VAR), #VAR)
+        void rawData(eLogLevel lvl, eLogSubsystem ss, eLogType type, uint32_t len, const char *data, const char *id);
+        #define rawVar(lvl, ss, type, VAR) \
+            rawData(lvl, ss, type, sizeof(VAR), (char *)&(VAR), #VAR)
 
     protected:
         Logger();
