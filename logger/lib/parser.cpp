@@ -33,7 +33,7 @@ bool filterLog(eLogLevel lvl, eLogSubsystem ss) {
 	return false;
 }
 
-extern const ParseFunctionPointer parseFunctions[NUM_TYPES] = {
+const ParseFunctionPointer parseFunctions[NUM_TYPES] = {
 	[T_TIME] = parseTimeLog,
 	[T_COUNT] = parseCountLog,
 	[T_VERSION] = parseVersionLog,

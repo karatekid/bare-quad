@@ -2,11 +2,12 @@
 #define __CONFIG__H__
 #include<iostream>
 #include<cstring>
-
 #include<stdio.h>
 #include<stdint.h>
+// User libraries
+#include "logstuff.h"
 
-//General constants
+// General constants
 #define LOG_START_CHAR '>'
 
 // Log Level Setup

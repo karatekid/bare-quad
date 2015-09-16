@@ -29,12 +29,9 @@ void logRawData(eLogLevel lvl, eLogSubsystem ss, eLogType type, uint8_t length, 
 	logRawData(lvl, ss, type, sizeof(VAR), (char *)&(VAR), #VAR)
 
 // Helper that makes writing arbitrary data easy
-void writeRawData(uint8_t len, void *d);
+void writeRawData(uint8_t len, const char *d);
 // A macro so you don't have to calculate len everytime
 #define writeRawValue(v) \
-	writeRawData(sizeof(v), (void *)&(v))
-
-//void * getRawData();
-
+	writeRawData(sizeof(v), (char *)&(v))
 
 #endif
