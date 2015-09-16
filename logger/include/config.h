@@ -11,12 +11,16 @@
 #define LOG_START_CHAR '>'
 
 // Log Level Setup
-#define NUM_LOG_LEVELS 4
+#define NUM_LOG_LEVELS 5
 typedef enum {
-	ERROR,
-	WARNING,
-	DEBUG,
-	INFO
+    // Don't use this anywhere, specifiically for filtering out
+    // everything
+    IGNORE_SS,
+    // IGNORE_SS must be first entry
+    ERROR,
+    WARNING,
+    DEBUG,
+    INFO
 } eLogLevel;
 extern const char *const logLevelNames[NUM_LOG_LEVELS];
 
@@ -24,8 +28,8 @@ extern const char *const logLevelNames[NUM_LOG_LEVELS];
 // Log Subsystem Setup
 #define NUM_SUBSYSTEMS 2
 typedef enum {
-	SS_MAIN,
-	SS_PID
+    SS_MAIN,
+    SS_PID
 } eLogSubsystem;
 extern const char *const logSubsystemNames[NUM_SUBSYSTEMS];
 
@@ -35,13 +39,13 @@ extern const char *const logSubsystemNames[NUM_SUBSYSTEMS];
 #define NUM_USER_TYPES 1
 #define NUM_TYPES (NUM_DEFAULT_TYPES + NUM_USER_TYPES)
 typedef enum {
-	// Default types
-	T_TIME,
-	T_COUNT,
-	T_VERSION,
-	T_PRINT,
-	// User types
-	T_LOGSTUFF
+    // Default types
+    T_TIME,
+    T_COUNT,
+    T_VERSION,
+    T_PRINT,
+    // User types
+    T_LOGSTUFF
 } eLogType;
 extern const char *const logTypeNames[NUM_TYPES];
 
@@ -53,8 +57,8 @@ typedef void(*ParseFunctionPointer)(uint16_t, const char *);
 // On Arduino
 #define writec(c) Serial.print(c)
 #define readc() \
-	while(!Serial.available()); \
-	Serial.read()
+    while(!Serial.available()); \
+    Serial.read()
 #define getmicros() micros()
 #else
 // On computer

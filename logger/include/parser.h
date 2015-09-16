@@ -3,8 +3,6 @@
 #include "config.h"
 // Parses one log object
 void parseLog(); 
-// Return true if don't want it (filter it)
-bool filterLog(eLogLevel lvl, eLogSubsystem ss);
 
 // Parsing functions
 extern const ParseFunctionPointer parseFunctions[NUM_TYPES];
@@ -17,6 +15,6 @@ void parsePrintLog(uint16_t len, const char *data);
 void parseLogStuff(uint16_t len, const char *data);
 
 #define cpyRawValue(d, o) \
-	memcpy((void *)&(d), (void *)(o), sizeof(d))
+    memcpy((void *)&(d), (void *)(o), sizeof(d))
 
 #endif

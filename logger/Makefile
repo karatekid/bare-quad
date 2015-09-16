@@ -10,11 +10,11 @@ ODIR=obj
 #Files
 BINFILE= logger parser
 LSRC= logger.cpp \
-	  config.cpp \
-	  log_main.cpp
+	config.cpp \
+ 	log_main.cpp
 PSRC= parser.cpp \
-	  config.cpp \
-	  parse_main.cpp
+ 	config.cpp \
+	parse_main.cpp
 _POBJ=$(PSRC:.cpp=.o)
 POBJ=$(patsubst %,$(ODIR)/%,$(_POBJ))
 _PDEPS= parser.h config.h logstuff.h
@@ -32,11 +32,11 @@ ifdef DEBUG
 CPPFLAGS := $(CPPFLAGS) -g
 endif
 ifdef VERBOSE
-        Q =
-        E = @true 
+	Q =
+	E = @true 
 else
-        Q = @
-        E = @echo 
+	Q = @
+	E = @echo 
 endif
 
 .PHONY: all help clean

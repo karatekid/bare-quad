@@ -12,22 +12,23 @@
 #include "config.h"
 
 const char *const logLevelNames[NUM_LOG_LEVELS] = {
-	[ERROR]   = "Error",
-    [WARNING] = "Warning",
-	[DEBUG]   = "Debug",
-	[INFO]    = "Info"
+    [IGNORE_SS]   = "IGNORE",
+    [ERROR]       = "Error",
+    [WARNING]     = "Warning",
+    [DEBUG]       = "Debug",
+    [INFO]        = "Info"
 };
 
 const char *const logSubsystemNames[NUM_SUBSYSTEMS] = {
-	[SS_MAIN] = "Main",
+    [SS_MAIN] = "Main",
     [SS_PID]  = "PID"
 };
 
 const char *const logTypeNames[NUM_TYPES] = {
-	[T_TIME]     = "Time",
-	[T_COUNT]    = "Count",
-	[T_VERSION]  = "Version",
-	[T_PRINT]    = "Print",
+    [T_TIME]     = "Time",
+    [T_COUNT]    = "Count",
+    [T_VERSION]  = "Version",
+    [T_PRINT]    = "Print",
 
-	[T_LOGSTUFF] = "Log Stuff"
+    [T_LOGSTUFF] = "Log Stuff"
 };
