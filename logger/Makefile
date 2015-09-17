@@ -60,11 +60,10 @@ parse: $(POBJ) $(PDEPS)
 
 arduino:
 	$(E) Making a directory for arduino
-	$(Q)if [ ! -d logger ]; then mkdir -p logger; fi
-	$(Q)cp $(IDIR)/logger.h logger/logger.h
-	$(Q)cp $(IDIR)/config.h logger/config.h
-	$(Q)cp $(IDIR)/logstuff.h logger/logstuff.h
-	$(Q)cp $(LDIR)/logger.cpp logger/logger.cpp
+	$(Q)cp $(IDIR)/logger.h arduino/logger.h
+	$(Q)cp $(IDIR)/config.h arduino/config.h
+	$(Q)cp $(IDIR)/logstuff.h arduino/logstuff.h
+	$(Q)cp $(LDIR)/logger.cpp arduino/logger.cpp
 
 clean:
 	$(E)Removing Files
