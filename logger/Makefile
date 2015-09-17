@@ -58,6 +58,14 @@ parse: $(POBJ) $(PDEPS)
 	$(E)Linking $@
 	$(Q)$(CXX) -o $@ $^ $(CPPFLAGS) $(LIBS) $(LDFLAGS)
 
+arduino:
+	$(E) Making a directory for arduino
+	$(Q)if [ ! -d logger ]; then mkdir -p logger; fi
+	$(Q)cp $(IDIR)/logger.h logger/logger.h
+	$(Q)cp $(IDIR)/config.h logger/config.h
+	$(Q)cp $(IDIR)/logstuff.h logger/logstuff.h
+	$(Q)cp $(LDIR)/logger.cpp logger/logger.cpp
+
 clean:
 	$(E)Removing Files
 	$(Q)rm -f $(ODIR)/*.o $(BINFILE)
