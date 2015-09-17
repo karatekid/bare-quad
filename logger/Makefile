@@ -8,12 +8,10 @@ IDIR=include
 LDIR=lib
 ODIR=obj
 #Files
-BINFILE= logger parser
+BINFILE= log parse
 LSRC= logger.cpp \
-	config.cpp \
  	log_main.cpp
 PSRC= parser.cpp \
- 	config.cpp \
 	parse_main.cpp
 _POBJ=$(PSRC:.cpp=.o)
 POBJ=$(patsubst %,$(ODIR)/%,$(_POBJ))
@@ -52,11 +50,11 @@ $(ODIR)/%.o: $(LDIR)/%.cpp $(DEPS)
 	$(Q)if [ ! -d `dirname $@` ]; then mkdir -p `dirname $@`; fi
 	$(Q)$(CXX) -o $@ -c $< $(CPPFLAGS) -I$(IDIR)
 
-logger: $(LOBJ) $(LDEPS)
+log: $(LOBJ) $(LDEPS)
 	$(E)Linking $@
 	$(Q)$(CXX) -o $@ $^ $(CPPFLAGS) $(LIBS) $(LDFLAGS)
 
-parser: $(POBJ) $(PDEPS)
+parse: $(POBJ) $(PDEPS)
 	$(E)Linking $@
 	$(Q)$(CXX) -o $@ $^ $(CPPFLAGS) $(LIBS) $(LDFLAGS)
 

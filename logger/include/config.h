@@ -42,8 +42,6 @@ enum eLogLevel{
     DEBUG,
     INFO
 };
-extern const char *const logLevelNames[NUM_LOG_LEVELS];
-
 
 // Log Subsystem Setup
 #define NUM_SUBSYSTEMS 2
@@ -51,8 +49,6 @@ enum eLogSubsystem{
     SS_MAIN,
     SS_PID
 };
-extern const char *const logSubsystemNames[NUM_SUBSYSTEMS];
-
 
 //Log Type Setup
 #define NUM_DEFAULT_TYPES 4
@@ -67,8 +63,5 @@ enum eLogType{
     // User types
     T_LOGSTUFF
 };
-extern const char *const logTypeNames[NUM_TYPES];
-
-typedef void(*ParseFunctionPointer)(uint16_t, const char *);
 
 #endif
