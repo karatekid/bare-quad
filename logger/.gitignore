@@ -5,3 +5,7 @@ obj/
 log
 logger
 parse
+arduino/config.h
+arduino/logger.cpp
+arduino/logger.h
+arduino/logstuff.h

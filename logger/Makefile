@@ -25,6 +25,10 @@ LDEPS=$(patsubst %,$(IDIR)/%,$(_LDEPS))
 
 DEPS=$(LDEPS) $(PDEPS)
 
+ARD_DIR=arduino
+ARD_SRC=$(ARD_DIR)/logger.cpp
+ARD_DEPS=$(patsubst %,$(ARD_DIR)/%,$(_LDEPS))
+
 #Flag Handling
 ifdef DEBUG
 CPPFLAGS := $(CPPFLAGS) -g
@@ -58,8 +62,8 @@ parse: $(POBJ) $(PDEPS)
 	$(E)Linking $@
 	$(Q)$(CXX) -o $@ $^ $(CPPFLAGS) $(LIBS) $(LDFLAGS)
 
-arduino:
-	$(E) Making a directory for arduino
+ard:
+	$(E) Copying files into arduino
 	$(Q)cp $(IDIR)/logger.h arduino/logger.h
 	$(Q)cp $(IDIR)/config.h arduino/config.h
 	$(Q)cp $(IDIR)/logstuff.h arduino/logstuff.h
@@ -68,4 +72,5 @@ arduino:
 clean:
 	$(E)Removing Files
 	$(Q)rm -f $(ODIR)/*.o $(BINFILE)
+	$(Q)rm -f $(ARD_SRC) $(ARD_DEPS)
 	$(Q)if [ -d $(ODIR) ]; then rmdir $(ODIR); fi
