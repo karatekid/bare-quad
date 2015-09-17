@@ -44,6 +44,7 @@ void Logger::logHead(
     writec(lvl);
     writec(ss);
     writec(type);
+    writec(LOG_CHECK_CHAR);
     // This is where the majority of length checking happens
     if(len > UINT16_MAX) {
 #ifndef ARDUINO

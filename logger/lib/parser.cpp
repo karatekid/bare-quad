@@ -14,8 +14,11 @@ void parseLog() {
     eLogLevel lvl = (eLogLevel) readc();
     eLogSubsystem ss = (eLogSubsystem) readc();
     eLogType type = (eLogType) readc();
+    if(readc() != LOG_CHECK_CHAR){
+        return;
+    }
     uint16_t len  = (uint16_t) readc();
-    len += ((uint16_t) readc()) << 8;
+    len |= ((uint16_t) readc()) << 8;
     char *payload = new char[len];
     for(uint16_t i = 0; i < len; ++i) {
         payload[i] = readc();
@@ -49,7 +52,7 @@ void parseTimeLog(uint16_t len, const char *data) {
     } else {
         printf("ended");
     }
-    printf(" @ %d seconds\n", time);
+    printf(" @ %d usecs\n", time);
 }
 
 void parseCountLog(uint16_t len, const char *data) {

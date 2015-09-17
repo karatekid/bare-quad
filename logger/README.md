@@ -9,9 +9,9 @@ at compile time. The design of the protocol is given below.
 
 The logger message protocol has a fairly straightforward design.
 
-| Start | Log Level | Subsystem | Msg Type | Len | Payload |
+| Start | Log Level | Subsystem | Msg Type | Check byte | Len | Payload |
 |-------|-----------|-----------|----------|-----|---------|
-| '>'   | 1 byte id | 1 byte id | 1 byte id | # of bytes in payload (2 bytes) | {Len} byte payload specified by previous field |
+| '>'   | 1 byte id | 1 byte id | 1 byte id | '@' | # of bytes in payload (2 bytes) | {Len} byte payload specified by previous field |
 
 ### Payload
 
