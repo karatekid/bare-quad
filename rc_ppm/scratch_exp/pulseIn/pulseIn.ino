@@ -1,5 +1,4 @@
-int pin = 2;
-int pins[] = {10,11,12,13};
+int pins[] = {A0,A1,A2,A3};
 int num_pins = 4;
 unsigned long duration;
 

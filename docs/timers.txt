@@ -1,0 +1,14 @@
+timer[0-2]
+
+0/2: 8bit
+1: 16bit
+
+(The 1280/2560 have 3 additional  16 bit timers)
+
+Uses:
+0: typical for timer fxns ie) delay(), millis()
+	PWM 5&6
+1: Servo
+	PWM 9&10
+2: toner
+	PWM 11&13
