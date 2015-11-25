@@ -14,3 +14,6 @@ PCINT's for short. I found that the ADC0-5 pins on the mega don't have a PCINT,
 that duty is relegated to ADC8-15 and it is no longer PCINT1_vect, but
 PCINT2_vect. This makes our code not very transferrable inbetween MEGA and UNO
 code.
+
+I found a good `avr-libc` manual
+[here](http://www.nongnu.org/avr-libc/user-manual/group__avr__interrupts.html).
